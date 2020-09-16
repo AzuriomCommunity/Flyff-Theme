@@ -25,6 +25,11 @@
         @auth
         @yield('content')
     @else
+
+        @php
+            session(['url.intended' => '/shop']);
+        @endphp
+
     <div class="container content">
         <div class="row justify-content-center">
             <div class="col-md-8">
