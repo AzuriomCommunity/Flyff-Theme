@@ -12,9 +12,26 @@
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
+    @stack('scripts')
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    @stack('styles')
+    <style>
+    a {
+		cursor: url('/assets/flyff_link.cur'), pointer;
+	}
+	[type=submit]:not(:disabled), button:not(:disabled) {
+		cursor: url('/assets/flyff_link.cur'), pointer;
+	}
+	html {
+		cursor: url('/assets/flyff.cur'), default;
+	}
+
+	img {
+		cursor: url('/assets/flyff_link.cur'), pointer;
+	}
+    </style>
 </head>
 <body>
     <main>
@@ -85,12 +102,6 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ trans('auth.login') }}
                                     </button>
-    
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ trans('auth.forgot-password') }}
-                                        </a>
-                                    @endif
                                 </div>
                             </div>
                         </form>

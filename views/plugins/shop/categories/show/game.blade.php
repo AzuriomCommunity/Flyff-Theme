@@ -1,17 +1,133 @@
-<div class="content" style="max-width: 790px;max-height: 569px;">
-	<div class="row">
-		<div class="col-3">
+@push('styles')
+<style>
+	.sc5::-webkit-scrollbar {
+	width: 15px;
+	height: 15px;
+	}
+	.sc5::-webkit-scrollbar-track {
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.1);
+	}
+	.sc5::-webkit-scrollbar-thumb {
+	background-image: linear-gradient(45deg, #00aeff, #a68eff);
+	border-radius: 10px;
+		-webkit-box-shadow: rgba(0,0,0,.12) 0 3px 13px 1px;
+	}
+	#main {
+		overflow-y: scroll
+	}
 
-			<div class="list-group ml-3 mt-3">
+	.quantity {
+	position: relative;
+	display: inline-flex;
+	}
+
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+	}
+
+	input[type=number] {
+	-moz-appearance: textfield;
+	}
+
+	.quantity input {
+	height: 30px;
+	line-height: 1.65;
+	float: left;
+	display: block;
+	padding: 0;
+	margin: 0;
+	padding-left: 20px;
+	border: none;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+	font-size: 1rem;
+	border-radius: 4px;
+	}
+
+	.quantity input:focus {
+	outline: 0;
+	}
+
+	.quantity-nav {
+	float: left;
+	position: relative;
+	height: 30px;
+	}
+
+	.quantity-button {
+	position: relative;
+	cursor: pointer;
+	border: none;
+	border-left: 1px solid rgba(0, 0, 0, 0.08);
+	width: 20px;
+	text-align: center;
+	color: #333;
+	font-size: 13px;
+	font-family: "FontAwesome" !important;
+	line-height: 1.5;
+	padding: 0;
+	background: #FAFAFA;
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	}
+
+	.quantity-button:active {
+	background: #EAEAEA;
+	}
+
+	.quantity-button.quantity-up {
+	position: absolute;
+	height: 50%;
+	top: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	cursor: url('/assets/flyff_link.cur'), pointer;
+	border-radius: 0 4px 0 0;
+	line-height: 1.6
+	}
+
+	.quantity-button.quantity-down {
+	position: absolute;
+	bottom: 0;
+	height: 50%;
+	border-radius: 0 0 4px 0;
+	cursor: url('/assets/flyff_link.cur'), pointer;
+	}
+
+	.parent-quantity {
+		height: 30px;
+	}
+
+	#left-side-bar {
+		padding-left: 0;
+		padding-right: 0;
+	}
+</style>
+@endpush
+<div style="height: 565px;" class="content bg-primary">
+	<div class="row" style="height: 15%">
+		<div id="header" class="col-12 bg-dark text-center">
+			<img class="mt-1" height="64px" src="{{site_logo()}}" alt="">
+		</div>
+	</div>
+	
+	<div class="row" style="height: 80%">
+		<div id="left-side-bar" class="col-2 bg-info rounded">
+			<div class="list-group categories" style="font-size: smaller;">
 				@foreach($categories as $subCategory)
-					<a href="{{ route('shop.categories.show', $subCategory) }}" class="list-group-item @if($category->is($subCategory)) active @endif">{{ $subCategory->name }}</a>
+					<a href="{{ route('shop.categories.show', $subCategory) }}" class="list-group-item list-group-item-action py-1 @if($category->is($subCategory)) active @endif">{{ $subCategory->name }}</a>
 				@endforeach
 			</div>
-			
 			@auth
 				<div class="mb-4">
 					@if(use_site_money())
-						<p class="text-center">{{ trans('messages.fields.money') }}: {{ format_money(auth()->user()->money) }}</p>
+						<p class="text-center bg-warning mt-3">{{ format_money(auth()->user()->money) }}</p>
                     @endif
                     <a href="{{ route('shop.cart.index') }}" class="btn btn-primary btn-block ml-2 mt-1">{{ trans('shop::messages.cart.title') }}</a>
 				</div>
@@ -29,52 +145,49 @@
 				</div>
 			@endif
 		</div>
-		<div class="col-9" style="background-color: grey; height:520px">
+		<div id="main" class="col-7 bg-secondary sc5">
+			<h2 class="text-truncate">{{$category->name}}</h2>
+			<div class="row bg-light">
 				@forelse($category->packages as $package)
-
-					<div class="media my-4">
-						@if($package->image !== null)
-							<a href="#" data-package-url="{{ route('shop.packages.show', $package) }}">
-								<img height="64px" class="align-self-center mr-3" src="{{ $package->imageUrl() }}" alt="{{ $package->name }}">
-							</a>
-						@endif
-						<div class="media-body text-break">
-							<h5 class="mt-0 mb-1">{{ $package->name }} 
+					<div class="col-6">
+						<h6 class="text-truncate">{{$package->name}}</h6>
+						<form action="{{ route('shop.packages.buy', $package) }}" method="POST" class="form-inline">
+							@csrf
+							
+							<div class="media w-100">
+								@if($package->image !== null)
+									<img onclick="showItem(this)" height="64" class="align-self-center mr-1 custom-cursor" src="{{ $package->imageUrl() }}" alt="{{ $package->name }}" data-package-url="{{ route('shop.packages.show', $package) }}">
+								@endif
+								<div class="media-body" style="font-size: small">
+									
+									<ul class="list-unstyled">
+										<li class="w-100">
+											@if($package->isDiscounted())
+												<del class="small">{{ $package->getOriginalPrice() }}</del>
+											@endif
+											{{ shop_format_amount($package->getPrice()) }}
+										</li>
+										<li class="parent-quantity w-100">
+											Quantité :
+											@if($package->has_quantity)
+											<div class="quantity">
+												<input type="number" style="width: 50px" min="1" max="{{ $package->getMaxQuantity() }}" name="quantity" step="1" value="1">
+											</div>
+											@else
+											1
+											@endif
+											
+										</li>
+									</ul>
+								</div>
 								
-								<h6>
-									@if($package->isDiscounted())
-										<del class="small">{{ $package->getOriginalPrice() }}</del>
-									@endif
-                                    {{ shop_format_amount($package->getPrice()) }}
-                                    
-								</h6>
-								
-                            </h5>
-                            <form action="{{ route('shop.packages.buy', $package) }}" method="POST" class="form-inline">
-                                @csrf
-                            
-                                @if($package->has_quantity)
-                                    <div class="input-group input-group-sm mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">{{ trans('shop::messages.fields.quantity') }}</span>
-                                        </div>
-                                        <input type="number" min="0" max="{{ $package->getMaxQuantity() }}" size="5" class="form-control" name="quantity" id="quantity" value="1">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                {{ trans('shop::messages.buy') }}
-                                            </button>
-                                         </div>
-                                    </div>
-                                @else
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ trans('shop::messages.buy') }}
-                                    </button>
-                                @endif
+							</div>
+							<button type="submit" class="btn btn-primary btn-block btn-sm">
+								{{ trans('shop::messages.buy') }}
+							</button>
+						</form>
 
-                            </form>
-						</div>
 					</div>
-                    
 				@empty
 					<div class="col">
 						<div class="alert alert-warning" role="alert">
@@ -82,6 +195,66 @@
 						</div>
 					</div>
 				@endforelse
+			</div>
+		</div>
+		<div id="right-side-bar" class="col-3 bg-info">
+			<h2>Détails</h2>
+			<hr>
+			<div id="object-detail" style="overflow-y: scroll">
+
+			</div>
 		</div>
 	</div>
+	<div class="row">
+		<button class="col-4">INFO</button>
+		<button class="col-4">ACHATS</button>
+		<button class="col-4">RECHARGER</button>
+	</div>
 </div>
+@push('scripts')
+<script>
+	document.addEventListener('DOMContentLoaded', function(){
+		jQuery('<div class="quantity-nav"><a class="quantity-button quantity-up">⇧</a><a class="quantity-button quantity-down">⇩</a></div>').insertAfter('.quantity input');
+		jQuery('.quantity').each(function () {
+			var spinner = jQuery(this),
+				input = spinner.find('input[type="number"]'),
+				btnUp = spinner.find('.quantity-up'),
+				btnDown = spinner.find('.quantity-down'),
+				min = input.attr('min'),
+				max = input.attr('max');
+			
+			btnUp.click(function () {
+				var oldValue = parseFloat(input.val());
+				if (oldValue >= max) {
+					var newVal = oldValue;
+				} else {
+					var newVal = oldValue + 1;
+				}
+				spinner.find("input").val(newVal);
+				spinner.find("input").trigger("change");
+			});
+			
+			btnDown.click(function () {
+				var oldValue = parseFloat(input.val());
+				if (oldValue <= min) {
+					var newVal = oldValue;
+				} else {
+					var newVal = oldValue - 1;
+				}
+				spinner.find("input").val(newVal);
+				spinner.find("input").trigger("change");
+			});
+		});
+	});
+	function showItem(el){
+		$.get(el.dataset['packageUrl'], {
+                    headers: {
+                        'X-PJAX': 'true'
+                    }
+            }, function(response){
+				console.log(response)
+				$('#object-detail').html(response);
+			})
+		}
+ </script>
+@endpush

@@ -169,22 +169,23 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
+                    <form method="POST" action="{{ route('shop.cart.payment') }}">
+                        @csrf
+                        <div class="modal-body">
+                            {{ trans('shop::messages.cart.pay-confirm', ['price' => shop_format_amount($cart->total())]) }}
+                            @if (!session()->has('azuriom_is_game'))
+                                <label for="flyff_player_name" class="col-md-4 col-form-label text-md-right">{{ trans('auth.name') }}</label>
+                                <input type="text" name="flyff_player_name" id="flyff_player_name">
+                            @endif
+                        </div>
 
-                    <div class="modal-body">
-                        {{ trans('shop::messages.cart.pay-confirm', ['price' => shop_format_amount($cart->total())]) }}
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">{{ trans('messages.actions.cancel') }}</button>
-
-                        <form method="POST" action="{{ route('shop.cart.payment') }}">
-                            @csrf
-
-                            <button class="btn btn-primary" type="submit">
-                                {{ trans('shop::messages.cart.pay') }}
-                            </button>
-                        </form>
-                    </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">{{ trans('messages.actions.cancel') }}</button>
+                                <button class="btn btn-primary" type="submit">
+                                    {{ trans('shop::messages.cart.pay') }}
+                                </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
