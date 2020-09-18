@@ -13,9 +13,6 @@
 	border-radius: 10px;
 		-webkit-box-shadow: rgba(0,0,0,.12) 0 3px 13px 1px;
 	}
-	#main {
-		overflow-y: scroll
-	}
 
 	.quantity {
 	position: relative;
@@ -108,17 +105,47 @@
 		padding-left: 0;
 		padding-right: 0;
 	}
+	.bg-dark-flyff {
+		background-color: #3d3c3c;
+		color: #b1ae7a
+		
+	}
+
+	#left-side-bar {
+		width: 15%;
+		border: 2pt double #b1ae7a;
+		border-radius: 5px
+	}
+	#main {
+		width: 55%;
+		border: 2pt double #b1ae7a;
+		border-radius: 5px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	#right-side-bar {
+		width: 23%;
+		border: 2pt double #b1ae7a;
+		border-radius: 5px
+	}
+	.article-flyff {
+		background-color: #694623;
+		
+	}
+	.buy-btn {
+		background-color: #842d0a;
+	}
 </style>
 @endpush
-<div style="height: 565px;" class="content bg-primary">
+<div style="height: 565px;" class="content bg-dark-flyff">
 	<div class="row" style="height: 15%">
-		<div id="header" class="col-12 bg-dark text-center">
+		<div id="header" class="col-12 text-center">
 			<img class="mt-1" height="64px" src="{{site_logo()}}" alt="">
 		</div>
 	</div>
 	
 	<div class="row" style="height: 80%">
-		<div id="left-side-bar" class="col-2 bg-info rounded">
+		<div id="left-side-bar" class="ml-3 mt-2">
 			<div class="list-group categories" style="font-size: smaller;">
 				@foreach($categories as $subCategory)
 					<a href="{{ route('shop.categories.show', $subCategory) }}" class="list-group-item list-group-item-action py-1 @if($category->is($subCategory)) active @endif">{{ $subCategory->name }}</a>
@@ -127,9 +154,9 @@
 			@auth
 				<div class="mb-4">
 					@if(use_site_money())
-						<p class="text-center bg-warning mt-3">{{ format_money(auth()->user()->money) }}</p>
+						<p class="text-center bg-warning mt-3 text-dark">{{ format_money(auth()->user()->money) }}</p>
                     @endif
-                    <a href="{{ route('shop.cart.index') }}" class="btn btn-primary btn-block ml-2 mt-1">{{ trans('shop::messages.cart.title') }}</a>
+                    <a href="{{ route('shop.cart.index') }}" class="btn btn-primary btn-block mt-1">{{ trans('shop::messages.cart.title') }}</a>
 				</div>
 			@endauth
 			
@@ -145,11 +172,11 @@
 				</div>
 			@endif
 		</div>
-		<div id="main" class="col-7 bg-secondary sc5">
-			<h2 class="text-truncate">{{$category->name}}</h2>
-			<div class="row bg-light">
+		<div id="main" class="sc5 w-55 mt-2 ml-1">
+			<h3 class="text-truncate">{{$category->name}}</h3>
+			<div class="row">
 				@forelse($category->packages as $package)
-					<div class="col-6">
+					<div class="col-6 border border-dark article-flyff">
 						<h6 class="text-truncate">{{$package->name}}</h6>
 						<form action="{{ route('shop.packages.buy', $package) }}" method="POST" class="form-inline">
 							@csrf
@@ -182,7 +209,7 @@
 								</div>
 								
 							</div>
-							<button type="submit" class="btn btn-primary btn-block btn-sm">
+							<button type="submit" class="btn btn-warning btn-block btn-sm mb-2">
 								{{ trans('shop::messages.buy') }}
 							</button>
 						</form>
@@ -197,15 +224,15 @@
 				@endforelse
 			</div>
 		</div>
-		<div id="right-side-bar" class="col-3 bg-info">
+		<div id="right-side-bar" class="mt-2 mr-1">
 			<h2>Détails</h2>
-			<hr>
-			<div id="object-detail" style="overflow-y: scroll">
+			<div class="dropdown-divider"></div>
+			<div id="object-detail" class="bg-dark" style="height: 400px">
 
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row mt-1">
 		<button class="col-4">INFO</button>
 		<button class="col-4">ACHATS</button>
 		<button class="col-4">RECHARGER</button>

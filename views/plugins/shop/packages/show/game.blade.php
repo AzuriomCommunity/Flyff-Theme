@@ -1,6 +1,6 @@
 {{ $package->name }}
-<p>
-    {!! $package->description !!}
+<p style="overflow-y: scroll; height:250px">
+    {{ $package->short_description }}
 </p>
 
 @if($package->isDiscounted())
@@ -13,7 +13,7 @@
 @if($package->isInCart())
     <form action="{{ route('shop.cart.remove', $package) }}" method="POST" class="form-inline">
         @csrf
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary btn-block">
             {{ trans('shop::messages.actions.remove') }}
         </button>
     </form>
@@ -32,7 +32,7 @@
                 <input type="number" min="0" max="{{ $package->getMaxQuantity() }}" size="5" class="form-control" name="quantity" id="quantity" value="1">
             </div>
         @endif
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary btn-block">
             {{ trans('shop::messages.buy') }}
         </button>
     </form>
