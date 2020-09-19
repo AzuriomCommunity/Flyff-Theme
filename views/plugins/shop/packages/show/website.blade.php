@@ -43,7 +43,11 @@
                                 <input type="number" min="0" max="{{ $package->getMaxQuantity() }}" size="5" class="form-control" name="quantity" id="quantity" value="1">
                             </div>
                         @endif
-
+                        <br>
+                        <div class="form-group">
+                            <label for="flyff_player_name">{{ trans('auth.name') }}</label>
+                            <input type="text" id="flyff_player_name" class="form-control mx-3" name="flyff_player_name">
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             {{ trans('shop::messages.buy') }}
                         </button>
