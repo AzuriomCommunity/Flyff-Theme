@@ -1,10 +1,10 @@
 {
-    "id": "flyff",
-    "name": "Flyff",
-    "description": "Theme for Azuriom",
-    "version": "1.0.0",
+    "id": "flyff-default",
+    "name": "Flyff Default theme",
+    "description": "Default theme for Azuriom using the game Flyff",
+    "version": "0.1.0",
     "url": "https://azuriom.com",
     "authors": [
-        "Azuriom"
+        "Javdu10"
     ]
 }
