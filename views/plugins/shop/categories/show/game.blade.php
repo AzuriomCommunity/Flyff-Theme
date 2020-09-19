@@ -3,7 +3,7 @@
 #wrap {margin:-25px 0px 0px -5px; padding:26px 8px 14px 8px; width:800px; height:600px; background:url("{{ theme_asset('/assets/main_bg.png') }}") repeat-x left top; overflow:hidden; }
 
 #header{position:relative;height:83px;}
-#header h1{position:absolute; width:114px; height:61px; margin:14px 20px 0 24px; padding:0;background:url("{{ theme_asset('/assets/logo.png') }}") no-repeat;}
+#header img{position:absolute; width:114px; height:61px; margin:14px 20px 0 24px; padding:0;}
 a {color:#c1bd8e;text-decoration:none;}
 /*****************************************
 **		 	Flyff Earthquake v4.0		**
@@ -93,19 +93,19 @@ a:not([href]):not([tabindex]) { color: #000}
 
 .quantity-button:active {background: #EAEAEA;}
 
-.quantity-button.quantity-up {position: absolute;height: 50%;top: 0;border-bottom: 1px solid rgba(0, 0, 0, 0.08);cursor: url("{{ theme_asset(''/assets/flyff_link.cur'') }}"), pointer;border-radius: 0 4px 0 0;}
+.quantity-button.quantity-up {position: absolute;height: 50%;top: 0;border-bottom: 1px solid rgba(0, 0, 0, 0.08);cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;border-radius: 0 4px 0 0;}
 
-.quantity-button.quantity-down {position: absolute;bottom: 0;height: 50%;border-radius: 0 0 4px 0;cursor: url("{{ theme_asset(''/assets/flyff_link.cur'') }}"), pointer;}
+.quantity-button.quantity-down {position: absolute;bottom: 0;height: 50%;border-radius: 0 0 4px 0;cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;}
 
 .parent-quantity {height: 30px;}
 
-input {cursor: url("{{ theme_asset(''/assets/flyff_text.cur'') }}"), default;}
+input {cursor: url("{{ theme_asset('/assets/flyff_text.cur') }}"), default;}
 
 </style>
 @endpush
 <div id="wrap">
     <div id="header">
-        <h1></h1>
+        <img src="{{ site_logo() }}" alt="logo">
     </div>
     <div id="container">
         <div class="shopMenu text-decoration-none">
