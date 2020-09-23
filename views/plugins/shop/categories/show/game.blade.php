@@ -1,6 +1,6 @@
 @push('styles')
 <style>
-#wrap {margin:-25px 0px 0px -5px; padding:26px 8px 14px 8px; width:800px; height:600px; background:url("{{ theme_asset('/assets/main_bg.png') }}") repeat-x left top; overflow:hidden; }
+#wrap {margin:-25px 0px 0px -5px; padding:26px 8px 14px 8px; width:800px; height:600px; background:url("{{ theme_asset('main_bg.png') }}") repeat-x left top; overflow:hidden; }
 
 #header{position:relative;height:83px;}
 #header img{position:absolute; width:114px; height:61px; margin:14px 20px 0 24px; padding:0;}
@@ -12,23 +12,23 @@ a {color:#c1bd8e;text-decoration:none;}
 **		   Ripped from gPotato.			**
 *****************************************/
 .shopMenu{float:left;}
-.shopMenu .innerBox{padding-bottom:5px; background:url("{{ theme_asset('/assets/bg_LB.png') }}") no-repeat left bottom;}
+.shopMenu .innerBox{padding-bottom:5px; background:url("{{ theme_asset('bg_LB.png') }}") no-repeat left bottom;}
 .shopMenu ul{width:144px; margin:0; padding:0;}
 .shopMenu li{height:42px; margin:0; padding:0; border-left:1px solid #807559; border-right:1px solid #807559; list-style:none;}
-.shopMenu li a{display:block; height:41px; border-bottom:1px solid #2e3211; background:url("{{ theme_asset('/assets/bg_1px_L.png') }}");}
+.shopMenu li a{display:block; height:41px; border-bottom:1px solid #2e3211; background:url("{{ theme_asset('bg_1px_L.png') }}");}
 .shopMenu li a span{display:block; height:40px; padding-left:14px; border-bottom:1px solid #0c0c0c; font-size:13px; line-height:38px;}
-.shopMenu li a:hover{background:url("{{ theme_asset('/assets/bg_menu_over.gif') }}") repeat-x; color:#ecd11e;}
+.shopMenu li a:hover{background:url("{{ theme_asset('bg_menu_over.gif') }}") repeat-x; color:#ecd11e;}
 .shopMenu li.first{height:44px; border:0;}
-.shopMenu li.first a{height:44px; border:0; background:url("{{ theme_asset('/assets/bg_LT.png') }}") no-repeat;}
+.shopMenu li.first a{height:44px; border:0; background:url("{{ theme_asset('bg_LT.png') }}") no-repeat;}
 .shopMenu li.first a span{height:44px; border:0;}
-.shopMenu li.first a:hover{background:url("{{ theme_asset('/assets/bg_LT_over.png') }}") no-repeat;}
-.shopMenu li.last{background:url("{{ theme_asset('/assets/bg_1px_L.png') }}");}
+.shopMenu li.first a:hover{background:url("{{ theme_asset('bg_LT_over.png') }}") no-repeat;}
+.shopMenu li.last{background:url("{{ theme_asset('bg_1px_L.png') }}");}
 .shopMenu li.last a {border-bottom: 0;}
 
 /* item index */
-.listBox{display:inline-block; width:470px; padding-top:7px;  background:url("{{ theme_asset('/assets/bg_CT.png') }}") no-repeat left top; letter-spacing:normal; word-spacing:normal;}
-.listBox_btm{padding-bottom:7px; background:url("{{ theme_asset('/assets/bg_CB.png') }}") no-repeat left bottom;}
-.listBox_btm .innerBox{border-left:1px solid #807559; background:url("{{ theme_asset('/assets/bg_1px_C.png') }}"); height:425px;}
+.listBox{display:inline-block; width:470px; padding-top:7px;  background:url("{{ theme_asset('bg_CT.png') }}") no-repeat left top; letter-spacing:normal; word-spacing:normal;}
+.listBox_btm{padding-bottom:7px; background:url("{{ theme_asset('bg_CB.png') }}") no-repeat left bottom;}
+.listBox_btm .innerBox{border-left:1px solid #807559; background:url("{{ theme_asset('bg_1px_C.png') }}"); height:425px;}
 .listBox_btm .innerBox h2{margin:0; padding:8px 0 12px 14px; border-bottom:1px solid #000; color:#ecd11e; font-size:16px; font-weight:normal; text-transform:uppercase;}
 .listBox_btm .innerBox ul{zoom:1; margin:0; padding:0; border-top:1px solid #4c3b0f; border-bottom:1px solid #4c3b0f; background-color:#2a1a0a;}
 .listBox_btm .innerBox ul:after{content:""; display:block; clear:both;}
@@ -39,27 +39,27 @@ a {color:#c1bd8e;text-decoration:none;}
 #items_list li dd{margin:0; padding:0;}
 #items_list li dl{zoom:1;}
 #items_list li dl:after{content:""; display:block; clear:both;}
-#items_list li dt{margin:0; padding:6px 0 6px 14px; background:url("{{ theme_asset('/assets/bul_arrow.gif') }}") no-repeat left 50%; color:#777d19; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+#items_list li dt{margin:0; padding:6px 0 6px 14px; background:url("{{ theme_asset('bul_arrow.gif') }}") no-repeat left 50%; color:#777d19; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 #items_list li dd{float:left;}
-#items_list li dd.itemInfo{width:126px; min-height:36px; padding:7px; background:url("{{ theme_asset('/assets/bg_item.png') }}") no-repeat left top;}
+#items_list li dd.itemInfo{width:126px; min-height:36px; padding:7px; background:url("{{ theme_asset('bg_item.png') }}") no-repeat left top;}
 #items_list li dd.itemInfo span{display:block; color:#9f5c04; font-size:11px; line-height:13px;}
 .listBox_btm .innerBox .btnArea{margin:0; padding:3px 0 0 0;}
 .listBox_btm .innerBox .btnArea a{display:inline-block; width:101px; height:18px; font-size:11px; text-align:center; line-height:18px;}
-.listBox_btm .innerBox .btnArea .btn_gift{background-image:url("{{ theme_asset('/assets/bg_verschenken.gif') }}"); color:#c8d9ca; display: inline-block; height:20px ;font-size: 12px; line-height: 0; width: 101px;}
-.listBox_btm .innerBox .btnArea .btn_buy{margin-left:1px; background-image:url("{{ theme_asset('/assets/bg_kaufen.gif') }}"); color:#dcd7a0; font-size: 12px; line-height: 0; height:20px ; width: 102px;}
+.listBox_btm .innerBox .btnArea .btn_gift{background-image:url("{{ theme_asset('bg_verschenken.gif') }}"); color:#c8d9ca; display: inline-block; height:20px ;font-size: 12px; line-height: 0; width: 101px;}
+.listBox_btm .innerBox .btnArea .btn_buy{margin-left:1px; background-image:url("{{ theme_asset('bg_kaufen.gif') }}"); color:#dcd7a0; font-size: 12px; line-height: 0; height:20px ; width: 102px;}
 
 .pagination {margin:0; padding-top:6px; border-top:1px solid #000; text-align:center;justify-content: center;}
 .page-link, .pagination li{display:inline-block; _position:relative; padding:0; width:20px; height:19px; border:1px solid #472f09; background:#33210b; color:#a78e32; font-size:12px; line-height:17px; text-decoration:none; overflow:hidden; text-align:center;}
 .pagination a.next{width:33px; padding:0 7px;}
-.pagination a.next span{display:inline-block; padding-right:10px; background:url("{{ theme_asset('/assets/next_arrow.gif') }}") no-repeat right 50%;}
+.pagination a.next span{display:inline-block; padding-right:10px; background:url("{{ theme_asset('next_arrow.gif') }}") no-repeat right 50%;}
 .pagination a.prev{width:33px; padding:0 7px;}
-.pagination a.prev span{display:inline-block; padding-left:10px; background:url("{{ theme_asset('/assets/prev_arrow.gif') }}") no-repeat left 50%;}
+.pagination a.prev span{display:inline-block; padding-left:10px; background:url("{{ theme_asset('prev_arrow.gif') }}") no-repeat left 50%;}
 .page-item .active .page-link{display:inline-block; _position:relative; padding:0; width:20px; height:19px; border:1px solid #ab610a; background:#813f02; color:#f5fe7f; font-size:12px; line-height:17px; text-decoration:none; overflow:hidden; text-align:center;}
 #items_list {height: 365px;}
 
-.infoBox{display:inline-block; width: 165px; padding-top:7px; border-left:1px solid #807559; background:url("{{ theme_asset('/assets/bg_RT.png') }}") no-repeat left top; letter-spacing:normal; word-spacing:normal; vertical-align:top;}
-.infoBox_btm{padding-bottom:7px; background:url("{{ theme_asset('/assets/bg_RB.png') }}") no-repeat left bottom;}
-.infoBox_btm .innerBox{border-right:1px solid #807559; background:url("{{ theme_asset('/assets/bg_1px_R.png') }}");}
+.infoBox{display:inline-block; width: 165px; padding-top:7px; border-left:1px solid #807559; background:url("{{ theme_asset('bg_RT.png') }}") no-repeat left top; letter-spacing:normal; word-spacing:normal; vertical-align:top;}
+.infoBox_btm{padding-bottom:7px; background:url("{{ theme_asset('bg_RB.png') }}") no-repeat left bottom;}
+.infoBox_btm .innerBox{border-right:1px solid #807559; background:url("{{ theme_asset('bg_1px_R.png') }}");}
 .infoBox .innerBox h2{margin:0; padding:8px 0 12px 14px; border-bottom:1px solid #000; color:#b2ec1e; font-size:16px; font-weight:normal; text-transform:uppercase;}
 .infoBox .innerBox .itemDetail{padding:0 9px; border-top:1px solid #2f2b18;}
 .infoBox .innerBox .itemDetail ul{margin:0; padding:0;}
@@ -69,9 +69,9 @@ a {color:#c1bd8e;text-decoration:none;}
 .infoBox .innerBox .itemDetail li dd{margin:0; padding:0;}
 .infoBox .innerBox .itemDetail li dl{zoom:1;}
 .infoBox .innerBox .itemDetail li dl:after{content:""; display:block; clear:both;}
-.infoBox .innerBox .itemDetail li dt{margin:0; padding:6px 0 6px 14px; background:url("{{ theme_asset('/assets/bul_arrow.gif') }}") no-repeat left 8px; color:#777d19;}
+.infoBox .innerBox .itemDetail li dt{margin:0; padding:6px 0 6px 14px; background:url("{{ theme_asset('bul_arrow.gif') }}") no-repeat left 8px; color:#777d19;}
 .infoBox .innerBox .itemDetail li dd{float:left; height:56px; vertical-align:top;}
-.infoBox .innerBox .itemDetail li dd.itemInfo{width:84px; min-height:36px; padding:7px; background:url("{{ theme_asset('/assets/bg_detailitem.png') }}") no-repeat left top;}
+.infoBox .innerBox .itemDetail li dd.itemInfo{width:84px; min-height:36px; padding:7px; background:url("{{ theme_asset('bg_detailitem.png') }}") no-repeat left top;}
 .infoBox .innerBox .itemDetail li dd.itemInfo span{display:block; color:#9f5c04; font-size:11px; line-height:13px;}
 
 .quantity {position: relative;display: inline-flex;}
@@ -93,13 +93,13 @@ a:not([href]):not([tabindex]) { color: #000}
 
 .quantity-button:active {background: #EAEAEA;}
 
-.quantity-button.quantity-up {position: absolute;height: 50%;top: 0;border-bottom: 1px solid rgba(0, 0, 0, 0.08);cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;border-radius: 0 4px 0 0;}
+.quantity-button.quantity-up {position: absolute;height: 50%;top: 0;border-bottom: 1px solid rgba(0, 0, 0, 0.08);cursor: url("{{ theme_asset('flyff_link.cur') }}"), pointer;border-radius: 0 4px 0 0;}
 
-.quantity-button.quantity-down {position: absolute;bottom: 0;height: 50%;border-radius: 0 0 4px 0;cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;}
+.quantity-button.quantity-down {position: absolute;bottom: 0;height: 50%;border-radius: 0 0 4px 0;cursor: url("{{ theme_asset('flyff_link.cur') }}"), pointer;}
 
 .parent-quantity {height: 30px;}
 
-input {cursor: url("{{ theme_asset('/assets/flyff_text.cur') }}"), default;}
+input {cursor: url("{{ theme_asset('flyff_text.cur') }}"), default;}
 
 </style>
 @endpush

@@ -19,17 +19,17 @@
     @stack('styles')
     <style>
     a {
-		cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;
+		cursor: url("{{ theme_asset('flyff_link.cur') }}"), pointer;
 	}
 	[type=submit]:not(:disabled), button:not(:disabled) {
-		cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;
+		cursor: url("{{ theme_asset('flyff_link.cur') }}"), pointer;
 	}
 	html {
-		cursor: url("{{ theme_asset('/assets/flyff.cur') }}"), default;
+		cursor: url("{{ theme_asset('flyff.cur') }}"), default;
 	}
 
 	img {
-		cursor: url("{{ theme_asset('/assets/flyff_link.cur') }}"), pointer;
+		cursor: url("{{ theme_asset('flyff_link.cur') }}"), pointer;
 	}
     </style>
 </head>
