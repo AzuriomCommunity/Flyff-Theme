@@ -92,14 +92,14 @@ In the project Neuz in the file WebBox.cpp change the function InitWebGlobalVar 
 ```cpp
 void InitWebGlobalVar()
 {
-	WEB_ADDRESS_DEFAULT = "http://flyff.test/shop?is_game=1&m_idPlayer=%d&m_nServer=%d";
-	WEB_POSTDATA = "";
+	// nothing here on purpose
 }
 
 ```
 </details>
 
-- You will have to change `http://flyff.test` to your **own web domain**!
+- Find the constant `WEB_ADDRESS_DEFAULT = NULL` and change it to `WEB_ADDRESS_DEFAULT = "http://flyff.test/shop?is_game=1&m_idPlayer=%d&m_nServer=%d";` You will have to change `http://flyff.test` to your **own web domain**!
+- Find the constant `WEB_POSTDATA = NULL` and change it to `WEB_POSTDATA = "";`
 
 In the project **Neuz** in the file **WebBox.cpp** change the function **CWebBox::Refresh_Web** to :
 
