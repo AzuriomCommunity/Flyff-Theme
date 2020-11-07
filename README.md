@@ -186,3 +186,10 @@ bool CWebBox::Process(HWND hWnd,HINSTANCE hInstance, char* szUser, u_long nPlaye
 
 ```
 </details>
+
+### Known issues
+If the shop appear blank in-game look in **NeuzMsgProc.cpp** if you have something like below, if so, remove it
+```cpp
+	if( lstrcmp( g_Neuz.m_lpCertifierAddr, "127.0.0.1" ) == 0 )
+		WEB_ADDRESS_DEFAULT = "about:blank";
+```
