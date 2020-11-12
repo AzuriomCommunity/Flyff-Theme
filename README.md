@@ -123,13 +123,9 @@ void CWebBox::Refresh_Web()
 ```
 </details>
 
-Now that this is done you shall put these variables in the .env of your Azuriom website\
-(note that you should put your generated password here)
+Now that this is done you shall put your generated password in the .env of your Azuriom website\
 ```
 FLYFF_WEBSHOP_KEY=8b8d0c753894b018ce454b2e
-CHARACTER_01_DBF=character01
-LOGGING_01_DBF=log01
-ACCOUNT_DBF=login
 ```
 variables like `CHARACTER_01_DBF` should be 32 bits ODBC datasources if you already followed a tutorial to install a flyff server, you should be familiar with them
 
