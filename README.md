@@ -127,8 +127,6 @@ Now that this is done you shall put your generated password in the .env of your 
 ```
 FLYFF_WEBSHOP_KEY=8b8d0c753894b018ce454b2e
 ```
-variables like `CHARACTER_01_DBF` should be 32 bits ODBC datasources if you already followed a tutorial to install a flyff server, you should be familiar with them
-
 Last but not least, in the project **Neuz** in the file **WebBox.cpp** change the function **CWebBox::Process** to :
 
 <details>
