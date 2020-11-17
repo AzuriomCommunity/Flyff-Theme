@@ -15,7 +15,7 @@
 @endpush
 
 @section('content')
-    <div class="container content">
+    <div class="container">
         <h1>{{ trans('shop::messages.cart.title') }}</h1>
 
         @if(! $cart->isEmpty())
@@ -61,6 +61,25 @@
                 </p>
             </form>
 
+            <div class="row mb-4">
+                @php
+                    $characters = flyff_user(auth()->user())->characters;
+                @endphp
+
+                <form action="{{ route('flyff.cart.update_character') }}" method="POST" class="form-inline">
+                    @csrf
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose character : </label>
+                    <select name="character" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                        @foreach ($characters as $character)
+                            <option @if((int)$character->m_idPlayer === session('m_idPlayer') ) selected @endif value="{{$character->m_idPlayer}}_{{$character->serverindex}}">{{$character->m_szName}}</option>
+                        @endforeach
+                    </select>
+                  
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        {{ trans('messages.actions.update') }}
+                    </button>
+                  </form>
+            </div>
             <div class="row">
                 <div class="col-md-8">
                     <h5>{{ trans('shop::messages.cart.coupons') }}</h5>
@@ -173,10 +192,6 @@
                         @csrf
                         <div class="modal-body">
                             {{ trans('shop::messages.cart.pay-confirm', ['price' => shop_format_amount($cart->total())]) }}
-                            @if (!session()->has('azuriom_is_game'))
-                                <label for="flyff_player_name" class="col-md-4 col-form-label text-md-right">{{ trans('auth.name') }}</label>
-                                <input type="text" name="flyff_player_name" id="flyff_player_name">
-                            @endif
                         </div>
 
                         <div class="modal-footer">
