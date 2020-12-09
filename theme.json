@@ -2,10 +2,10 @@
     "id": "flyff-default",
     "name": "Flyff Default theme",
     "description": "Default theme for Azuriom using the game Flyff",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "url": "https://azuriom.com",
     "authors": [
-        "Javdu10"
+        "Linedev (Latshow)"
     ],
     "apiId": 31
 }
