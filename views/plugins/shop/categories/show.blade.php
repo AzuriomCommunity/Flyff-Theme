@@ -33,8 +33,7 @@
                                         </span>
 
                                             @if($package->isDiscounted())
-                                                <span
-                                                    class="font-weight-bold w-100 d-block mb-2">{{ $package->getOriginalPrice() }}</span>
+                                                <del class="font-weight-bold w-100 d-block mb-2">{{ $package->getOriginalPrice() }}</del>
                                             @endif
                                             <div class="shop--item-quantity mb-3">
                                                 <span class="small">Quantité :</span>
