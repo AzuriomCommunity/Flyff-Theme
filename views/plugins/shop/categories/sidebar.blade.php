@@ -1,35 +1,54 @@
-@auth
-    <div class="mb-1">
-        <img class="mx-auto d-block" style="width:100px" src="{{ site_logo() }}" alt="logo">
-        @if(use_site_money())
-            <div class="text-center">{{ trans('messages.fields.money') }}: {{ format_money(auth()->user()->money) }}</div>
-        @endif
+<div class="row">
+    <div class="col-xl-12 col-md-6 mb-5" data-aos="fade-right">
+        @auth
 
-        <div class="text-center">
-            @if(use_site_money())
-                <a href="{{ route('shop.offers.select') }}" class="btn btn-primary">{{ trans('shop::messages.cart.credit') }}</a>
-            @endif
-            <a href="{{ route('shop.cart.index') }}" class="btn btn-primary">{{ trans('shop::messages.cart.title') }}</a>
+            <h4>Compte</h4>
+            <div class="mb-4">
+                @if(use_site_money())
+                    <div class="shops--cash text-white font-weight-bold py-2 mb-3"><i class="fas fa-coins"></i>
+                        {{ format_money(auth()->user()->money) }}</div>
+                @endif
+
+                <div class="shops--account">
+                    @if( use_site_money() )
+                        <a href="{{ route('shop.offers.select') }}"
+                           class="btn btn-primary btn-grad mb-3"><i
+                                class="far fa-credit-card"></i>{{ trans('shop::messages.cart.credit') }}</a>
+                    @endif
+                    <a href="{{ route('shop.cart.index') }}"
+                       class="btn btn-primary btn-grad"><i
+                            class="fas fa-shopping-basket"></i>{{ trans('shop::messages.cart.title') }}</a>
+                </div>
+            </div>
+        @else
+            <a class="btn btn-primary btn-grad" href="{{ route('home') }}">Vous devez être connecté !</a>
+        @endauth
+    </div>
+
+    <div class="col-xl-12 col-md-6 mt-xl-5 mt-0" data-aos="fade-right" data-aos-delay="100">
+        <h4>Catégorie</h4>
+        <div class="shops--list-group list-group">
+            @foreach($categories as $subCategory)
+                <li class="list-group-item @if($category->is($subCategory)) active @endif">
+                    <a href="{{ route('shop.categories.show', $subCategory) }}">{{ $subCategory->name }}</a>
+                </li>
+            @endforeach
         </div>
     </div>
-@endauth
+    @if(!session()->has('azuriom_is_game'))
+        @if($goal !== false)
+            <div class="col-xl-12 col-md-6 my-4">
+                <h4>{{ trans('shop::messages.month-goal') }}</h4>
 
+                <div class="progress mb-1">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                         aria-valuenow="{{ $goal }}" aria-valuemin="0" aria-valuemax="100"
+                         style="width: {{ $goal }}%"></div>
+                </div>
 
-<div class="list-group list-group-vertical-sm">
-    @foreach($categories as $subCategory)
-        <a href="{{ route('shop.categories.show', $subCategory) }}" class="list-group-item @if($category->is($subCategory)) active @endif">{{ $subCategory->name }}</a>
-    @endforeach
-</div>
-@if(!session()->has('azuriom_is_game'))
-    @if($goal !== false)
-        <div class="mb-4">
-            <h4>{{ trans('shop::messages.month-goal') }}</h4>
-
-            <div class="progress mb-1">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $goal }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $goal }}%"></div>
+                <p class="text-center">{{ trans_choice('shop::messages.month-goal-current', $goal) }}</p>
             </div>
 
-            <p class="text-center">{{ trans_choice('shop::messages.month-goal-current', $goal) }}</p>
-        </div>
+        @endif
     @endif
-@endif
+</div>
