@@ -9,39 +9,81 @@
 
         <div id="vote-alert"></div>
 
-        <div class="vote vote-now text-center position-relative mb-4 px-3 py-5 border rounded" data-aos="fade-up">
-            <div class="@auth d-none @endauth" data-vote-step="1">
-                <form id="voteNameForm">
-                    <div class="form-group">
-                        <input type="text" id="stepNameInput" name="name" class="form-control"
-                               @auth value="{{ auth()->user()->name }}"
-                               @endauth placeholder="{{ trans('messages.fields.name') }}" required>
-                    </div>
+        @guest
+            <a href="/user/login"><div class="alert alert-warning">You need to login before you vote (click here)</div></a>
+        @else
+            <script>
+                document.addEventListener('DOMContentLoaded', function(){
+                    let form = document.querySelector('#vote-choose-characater')
+                    form.addEventListener('submit', function (ev) {
+                    ev.preventDefault();
 
-                    <button type="submit" class="btn btn-primary btn-grad">
-                        {{ trans('messages.actions.continue') }}
-                        <span class="d-none spinner-border spinner-border-sm load-spinner" role="status"></span>
-                    </button>
-                </form>
-            </div>
+                    const loaderIcon = form.querySelector('.load-spinner');
 
-            <div class="@guest d-none @endguest h-100" data-vote-step="2">
-                <div id="vote-spinner" class="d-none h-100">
-                    <div class="spinner-border text-white" role="status"></div>
+                    if (loaderIcon) {
+                        loaderIcon.classList.remove('d-none');
+                    }
+
+                    clearVoteAlert();
+
+                    axios.post("{{ route('flyff.cart.update_character') }}", {'character':document.querySelector('#inlineFormCustomSelectPref').value})
+                        .then(function () {
+                            toggleStep(2);
+                        })
+                        .catch(function (error) {
+                            displayVoteAlert(error.response.data.message, 'danger');
+                        })
+                        .finally(function () {
+                            if (loaderIcon) {
+                                loaderIcon.classList.add('d-none');
+                            }
+                        });
+                    });
+                })
+            </script>
+            <div class="vote vote-now text-center position-relative mb-4 px-3 py-5 border rounded" data-aos="fade-up">
+
+                <div class="h-100" data-vote-step="1">
+                    @php
+                        $characters = flyff_user(auth()->user())->characters;
+                    @endphp
+    
+                    <form id="vote-choose-characater" method="POST" class="form-inline">
+                        @csrf
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose character : </label>
+                        <select name="character" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                            @foreach ($characters as $character)
+                                <option @if((int)$character->m_idPlayer === session('m_idPlayer') ) selected
+                                        @endif value="{{$character->m_idPlayer}}_{{$character->serverindex}}">{{$character->m_szName}}</option>
+                            @endforeach
+                        </select>
+    
+                        <button type="submit" class="btn btn-warning btn-sm">
+                            {{ trans('messages.actions.update') }}
+                            <span class="d-none spinner-border spinner-border-sm load-spinner" role="status"></span>
+                        </button>
+                    </form>
                 </div>
 
-                @forelse($sites as $site)
-                    <a class="btn btn-primary btn-grad d-inline m-3" href="{{ $site->url }}" target="_blank"
-                       rel="noopener noreferrer"
-                       data-site-url="{{ route('vote.vote', $site) }}">{{ $site->name }}</a>
-                @empty
-                    <div class="alert alert-warning" role="alert">{{ trans('vote::messages.no-site') }}</div>
-                @endforelse
+                <div class="h-100 d-none" data-vote-step="2">
+                    <div id="vote-spinner" class="d-none h-100">
+                        <div class="spinner-border text-white" role="status"></div>
+                    </div>
+
+                    @forelse($sites as $site)
+                        <a class="btn btn-primary btn-grad d-inline m-3" href="{{ $site->url }}" target="_blank"
+                        rel="noopener noreferrer"
+                        data-site-url="{{ route('vote.vote', $site) }}">{{ $site->name }}</a>
+                    @empty
+                        <div class="alert alert-warning" role="alert">{{ trans('vote::messages.no-site') }}</div>
+                    @endforelse
+                </div>
+                <div class="d-none" data-vote-step="3">
+                    <p id="vote-result"></p>
+                </div>
             </div>
-            <div class="d-none" data-vote-step="3">
-                <p id="vote-result"></p>
-            </div>
-        </div>
+        @endguest
+        
 
         <h2 class="mt-5 mb-2" data-aos="fade-up" data-aos-delay="500">{{ trans('vote::messages.sections.top') }}</h2>
 
