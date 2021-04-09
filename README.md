@@ -88,25 +88,29 @@ with the snippet below
 
         <div class="h-100" data-vote-step="1">
             @php
-            $characters = flyff_user(auth()->user())->characters;
+                $characters = flyff_user(auth()->user())->characters;
             @endphp
 
-            <form id="vote-choose-characater" method="POST" class="form-inline">
-                @csrf
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose character : </label>
-                <select name="character" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                    @foreach ($characters as $character)
-                    <option @if((int)$character->m_idPlayer === session('m_idPlayer') ) selected
-                        @endif value="{{$character->m_idPlayer}}_{{$character->serverindex}}">{{$character->m_szName}}
-                    </option>
-                    @endforeach
-                </select>
+            @if($characters->count() > 0)
+                <form id="vote-choose-characater" method="POST" class="form-inline">
+                    @csrf
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choose character : </label>
+                    <select name="character" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                        @foreach ($characters as $character)
+                        <option @if((int)$character->m_idPlayer === session('m_idPlayer') ) selected
+                            @endif value="{{$character->m_idPlayer}}_{{$character->serverindex}}">{{$character->m_szName}}
+                        </option>
+                        @endforeach
+                    </select>
 
-                <button type="submit" class="btn btn-warning btn-sm">
-                    {{ trans('messages.actions.update') }}
-                    <span class="d-none spinner-border spinner-border-sm load-spinner" role="status"></span>
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        {{ trans('messages.actions.update') }}
+                        <span class="d-none spinner-border spinner-border-sm load-spinner" role="status"></span>
+                    </button>
+                </form>
+            @else
+                <div class="alert alert-warning">You need to create a in-game character before you vote</div>
+            @endif
         </div>
 
         <div class="h-100 d-none" data-vote-step="2">
@@ -115,10 +119,10 @@ with the snippet below
             </div>
 
             @forelse($sites as $site)
-            <a class="btn btn-primary btn-grad d-inline m-3" href="{{ $site->url }}" target="_blank"
-                rel="noopener noreferrer" data-site-url="{{ route('vote.vote', $site) }}">{{ $site->name }}</a>
+                <a class="btn btn-primary btn-grad d-inline m-3" href="{{ $site->url }}" target="_blank"
+                    rel="noopener noreferrer" data-site-url="{{ route('vote.vote', $site) }}">{{ $site->name }}</a>
             @empty
-            <div class="alert alert-warning" role="alert">{{ trans('vote::messages.no-site') }}</div>
+                <div class="alert alert-warning" role="alert">{{ trans('vote::messages.no-site') }}</div>
             @endforelse
         </div>
         <div class="d-none" data-vote-step="3">
