@@ -9,7 +9,7 @@
         <div class="row mt-3">
             @forelse($gateways as $gateway)
                 <div class="col-md-3">
-                    <a href="{{ route('shop.payments.pay', $gateway->type) }}" class="payment-method">
+                    <a href="{{ route('shop.offers.buy', $gateway) }}" class="payment-method">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ $gateway->paymentMethod()->image() }}" style="max-height: 45px"
