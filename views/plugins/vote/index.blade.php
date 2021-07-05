@@ -144,6 +144,10 @@
 @endsection
 
 @push('scripts')
+    @if(setting('vote.ipv4-v6-compatibility'))
+        <script src="https://ipv6-adapter.com/api/v1/api.js" async defer></script>
+    @endif
+
     <script src="{{ plugin_asset('vote', 'js/vote.js') }}" defer></script>
     <script>
         const voteRoute = '{{ route('vote.verify-user', '') }}';
